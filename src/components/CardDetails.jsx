@@ -1,33 +1,19 @@
-import { useEffect, useState } from 'react';
+
+
 import { FaCircle } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 
 
 function CardsDetails() {
    
+    const assingments = useLoaderData();
+    console.log(assingments)
 
-
-    const [assingments , setAssingments] = useState(null);
-    const { id } = useParams();
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`http://localhost:9000/assignments/${id}`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const jsonData = await response.json();
-                setAssingments(jsonData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } 
-        };
-        
-
-        fetchData();
-    }, []); // Ensure that this effect runs only once, or add params.id to the dependency array if needed
-
+    
+    
+    // Ensure that this effect runs only once, or add params.id to the dependency array if needed
+    console.log(assingments[0].email)
     return (
         <div className='my-20'>
         {
@@ -48,7 +34,8 @@ function CardsDetails() {
                                 <p className="flex items-center mb-2"> <FaCircle className="mr-2" />Difficulties : <span className=" ml-3 text-blue-600 text-lg">{assignment.dropdown}</span> </p>
                                 <p className="flex items-center  mb-2"> <FaCircle className="mr-2" />Description  : <span className="text-sm text-red-500 ml-3">{assignment.description}</span> </p>
                             </div>
-                            <Link to={'/take'}><div className="flex justify-center mt-8">
+                            {console.log(assignment._id)}
+                            <Link to={`/take/${assignment._id}`}><div className="flex justify-center mt-8">
                                 <button className='btn btn-outline btn-accent'>Take This Assingment</button>
                             </div></Link>
                         </div>

@@ -14,6 +14,7 @@ import CardDetails from "../components/CardDetails";
 import PrivateRoute from "./PrivateRoutes";
 import TakeAssi from "../components/TakeAssi";
 import MySubmit from "../components/MySubmit";
+import Pending from "../components/Pending";
   const router = createBrowserRouter([
     {
       path: "/",
@@ -33,9 +34,12 @@ import MySubmit from "../components/MySubmit";
         {
           path: '/assingment/:id',
           element: <PrivateRoute><CardDetails></CardDetails></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:9000/newRoute/${params.id}`)
+        }, 
+        {
+          path: '/pending',
+          element:<PrivateRoute><Pending></Pending></PrivateRoute> ,
         },
-        
-        
         {
           path: '/create',
           element:<PrivateRoute><CreateAssingment></CreateAssingment></PrivateRoute> ,
@@ -51,8 +55,9 @@ import MySubmit from "../components/MySubmit";
         },
         
         {
-          path: '/take',
+          path: '/take/:id',
           element: <TakeAssi></TakeAssi>,
+          loader: ({params}) => fetch(`http://localhost:9000/anotherCard/${params.id}`)
         },
         {
           path: '/submit',

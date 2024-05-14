@@ -1,21 +1,25 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../Provider/AuthProvider';
-
+import toast from 'react-hot-toast'
+import { useLoaderData, useNavigate } from 'react-router-dom';
 const AssignmentSubmission = () => {
+  const assingments = useLoaderData()
+  console.log(assingments[0].email)
   const [pdfLink, setPdfLink] = useState('');
   const [quickNote, setQuickNote] = useState('');
   const { user } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const title = document.getElementById('title').value;
     const mark = document.getElementById('marks').value;
     const pdf = pdfLink;
+    const creatorEmail = assingments[0].email
     const note = quickNote;
     const email = user.email;
     const status = 'pending';
-    const submit = { pdf, note, email, status, title, mark };
+    const submit = { pdf, note, email, status, title, mark ,creatorEmail};
   
     try {
       const { data } = await axios.post(
@@ -23,6 +27,8 @@ const AssignmentSubmission = () => {
         submit
       );
       console.log(data);
+      toast.success('Submit SuccessFully')
+      navigate('/submit')
     } catch (err) {
       console.log(err);
       console.log('Hi, I am error', err.message);

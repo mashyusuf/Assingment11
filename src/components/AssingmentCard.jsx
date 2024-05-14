@@ -29,7 +29,8 @@ const formatDate = (dateString) => {
 
 // Assignment card component
 const AssingmentCard = ({ assingment }) => {
-    const { title, mark, url, dropdown, date,description ,_id} = assingment;
+    const { title, mark, url, dropdown, date,description ,_id,email} = assingment;
+    console.log(email)
 
     return (
         <div className="flex flex-col items-center justify-center w-full max-w-sm mx-auto bg-slate-300 rounded-md">

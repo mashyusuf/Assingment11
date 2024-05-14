@@ -25,7 +25,7 @@ const CreateAssignmentPage = () => {
     const date = dueDate;
     const email = user.email;
     const description = form.querySelector('#description').value;
-    const everything = { title, mark, url, dropdown, date, description, email };
+    const everything = { title, mark, url, dropdown, date, description, email  };
 
     try {
       const response = await fetch('http://localhost:9000/assingments', {
