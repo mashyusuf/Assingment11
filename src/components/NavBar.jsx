@@ -45,14 +45,14 @@ const Navbar = () => {
         </NavLink>
         <NavLink
           onClick={() => handleLinkClick('about')} 
-          className={`hover:text-sky-700   ${activeLink === 'about' ? 'font-bold text-orange-300' : 'text-white'}`} 
+          className={({ isActive }) => isActive ? '  text-lg font-extrabold  text-sky-400' : ' text-white'}
           to='/submit'
         >
          MySubmitted Assingment
         </NavLink>
         <NavLink
           onClick={() => handleLinkClick('about')} 
-          className={`hover:text-sky-700   ${activeLink === 'about' ? 'font-bold text-orange-300' : 'text-white'}`} 
+          className={({ isActive }) => isActive ? '  text-lg font-extrabold  text-green-400' : ' text-white'}  
           to='/my-assingment'
         >
          My Assingment

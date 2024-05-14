@@ -7,7 +7,7 @@ const MySubmit = () => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch(`http://localhost:9000/assingment/${user?.email}`)
+    fetch(`http://localhost:9000/submit/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setAssignments(data); // Update assignments state with fetched data
@@ -54,11 +54,9 @@ const MySubmit = () => {
                       </div>
                     </th>
                     <th scope='col' className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'>
-                      <span>Date</span>
+                      <span>Mark</span>
                     </th>
-                    <th scope='col' className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'>
-                      Defficality
-                    </th>
+                    
                     <th scope='col' className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'>
                       Status
                     </th>
@@ -74,22 +72,7 @@ const MySubmit = () => {
                         {assignment.title}
                       </td>
                       <td className='px-4 py-4 text-sm text-gray-500 whitespace-nowrap'>
-                        {new Date(assignment.date).toLocaleDateString()}
-                      </td>
-                      <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                        <div className='flex items-center gap-x-2'>
-                          <p
-                            className={`px-3 py-1 ${
-                              assignment.dropdown === 'Easy' && 'text-blue-500 bg-blue-100/60'
-                            } ${
-                              assignment.dropdown === 'Medium' && 'text-emerald-500 bg-emerald-100/60'
-                            } ${
-                              assignment.dropdown === 'Hard' && 'text-pink-500 bg-pink-100/60'
-                            } text-xs rounded-full`}
-                          >
-                            {assignment.dropdown}
-                          </p>
-                        </div>
+                      {assignment.mark}
                       </td>
                       <td className='px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap'>
                         <div
@@ -105,7 +88,7 @@ const MySubmit = () => {
                         >
                           <span
                             className={`h-1.5 w-1.5 rounded-full ${
-                              assignment.status === 'Pending' && 'bg-yellow-500'
+                              assignment.status === 'Pending' && ' bg-yellow-500'
                             } ${
                               assignment.status === 'In Progress' && 'bg-blue-500'
                             } ${
