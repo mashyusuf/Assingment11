@@ -20,12 +20,24 @@ const MySubmit = () => {
   }, [user]); // Trigger effect whenever user changes
 
   const handleStatus = async (id, status) => {
-    const { data } = await axios.patch(`http://localhost:9000/status/${id}`, { status });
-    console.log(data);
+    try {
+      const { data } = await axios.patch(`http://localhost:9000/status/${id}`, { status });
+      console.log(data);
+      
+      // Update assignments state to reflect the new status
+      setAssignments(prevAssignments => prevAssignments.map(assignment => {
+        if (assignment._id === id) {
+          return { ...assignment, status }; // Update status of the clicked assignment
+        }
+        return assignment;
+      }));
+    } catch (error) {
+      console.error('Error updating assignment status:', error);
+    }
   };
 
   return (
-    <section className='container px-4 mx-auto pt-12'>
+    <section className='container px-4 mx-auto pt-12 mb-20'>
       <div className='flex items-center gap-x-3'>
         <h2 className='text-2xl font-bold text-gray-800'>My Submitted Assignment</h2>
         <span className='px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full'>
@@ -36,34 +48,34 @@ const MySubmit = () => {
       <div className='flex flex-col mt-6'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>
-            <div className='overflow-hidden border border-gray-200 md:rounded-lg'>
-              <table className='min-w-full divide-y divide-gray-200'>
-                <thead className='bg-gray-50'>
+            <div className='overflow-hidden border border-gray-500 md:rounded-lg'>
+              <table className='min-w-full divide-y divide-gray-600'>
+                <thead className='bg-gray-200'>
                   <tr>
-                    <th scope='col' className='py-3.5 px-4 text-sm font-bold text-left rtl:text-right text-gray-500'>
+                    <th scope='col' className='py-3.5 px-4 text-sm font-bold text-left rtl:text-right text-cyan-600'>
                       <div className='flex items-center gap-x-3'>
                         <span>Title</span>
                       </div>
                     </th>
-                    <th scope='col' className='px-4 py-3.5 text-sm font-bold text-left rtl:text-right text-gray-500'>
+                    <th scope='col' className='px-4 py-3.5 text-sm font-bold text-left rtl:text-right text-cyan-600'>
                       <span>Mark</span>
                     </th>
                     
-                    <th scope='col' className='px-4 py-3.5 text-sm font-bold text-left rtl:text-right text-gray-500'>
+                    <th scope='col' className='px-4 py-3.5 text-sm font-bold text-left rtl:text-right text-cyan-600'>
                       Status
                     </th>
-                    <th className='px-4 py-3.5 text-sm font-bold text-left rtl:text-right text-gray-500'>
+                    <th className='px-4 py-3.5 text-sm font-bold text-left rtl:text-right text-cyan-600'>
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className='bg-white divide-y divide-gray-200'>
+                <tbody className='bg-indigo-200 divide-y divide-gray-200'>
                   {Array.isArray(assignments) && assignments.map(assignment => (
                     <tr key={assignment._id}>
-                      <td className='px-4 py-4 text-sm text-gray-500 whitespace-nowrap font-bold'>
+                      <td className='px-4 py-4 text-sm text-fuchsia-600 whitespace-nowrap font-bold'>
                         {assignment.title}
                       </td>
-                      <td className='px-4 py-4 text-sm text-gray-500 whitespace-nowrap font-bold'>
+                      <td className='px-4 py-4 text-sm text-black whitespace-nowrap font-bold'>
                       {assignment.mark}
                       </td>
                       <td className='px-4 py-4 text-sm font-bold whitespace-nowrap'>

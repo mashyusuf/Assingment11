@@ -15,6 +15,7 @@ import PrivateRoute from "./PrivateRoutes";
 import TakeAssi from "../components/TakeAssi";
 import MySubmit from "../components/MySubmit";
 import Pending from "../components/Pending";
+import Normal from "../components/Normal";
   const router = createBrowserRouter([
     {
       path: "/",
@@ -50,8 +51,8 @@ import Pending from "../components/Pending";
         },
         {
           path: '/update/:id', // Add a forward slash before 'update'
-          element: <Update></Update>,
-          loader: ({params}) => fetch(`${import.meta.env.VITE_API_USER}/assingments/${params.id}`),
+          element: <Update></Update> ,
+          loader: ({params}) => fetch(`http://localhost:9000/update-myAssingment/${params.id}`)
         },
         
         {
@@ -61,7 +62,11 @@ import Pending from "../components/Pending";
         },
         {
           path: '/submit',
-          element: <MySubmit></MySubmit>,
+          element: <PrivateRoute><MySubmit></MySubmit></PrivateRoute>,
+        },
+        {
+          path: '/normal',
+          element: <Normal></Normal>,
         },
         {
           path: '/login',

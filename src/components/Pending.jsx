@@ -39,7 +39,7 @@ const Pending = () => {
             <tr className="bg-gray-200">
               <th className="border border-gray-500 px-4 py-2 text-2xl text-center font-bold ">Title</th>
               <th className="border border-gray-500 px-4 py-2 text-2xl text-center font-bold ">Examinee Name</th>
-              <th className="border border-gray-500 px-4 py-2  text-2xl text-center font-bold ">PDF/Docs Link</th>
+              <th className="border border-gray-500 px-4 py-2 text-2xl text-center font-bold ">PDF Preview</th>
               <th className="border border-gray-500 px-4 py-2 text-2xl text-center font-bold ">Give Mark</th>
             </tr>
           </thead>
@@ -49,9 +49,7 @@ const Pending = () => {
                 <td className="border border-gray-500 px-4 text-orange-600 text-center py-2 font-bold hover:text-blue-500">{assignment.title}</td>
                 <td className="border border-gray-500 px-4 text-emerald-500 text-center py-2 font-bold hover:text-blue-500">{assignment.note}</td>
                 <td className="border border-gray-500 px-4 text-center  py-2 font-bold">
-                  <a href={assignment.pdf} target="_blank" rel="noopener noreferrer" className="text-fuchsia-600  font-bold hover:text-blue-700">
-                    View PDF
-                  </a>
+                  <iframe src={assignment.pdf} width="100%" height="400px" title="PDF Preview"></iframe>
                 </td>
                 <td className="border border-gray-500 text-center px-4 py-2 font-bold">
                   <button

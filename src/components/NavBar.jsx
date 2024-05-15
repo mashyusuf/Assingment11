@@ -122,10 +122,11 @@ const Navbar = () => {
               </div>
             </div>
             <ul tabIndex={0} className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52'>
-              <li><Link to='/add-job' className='justify-between text-gray-900'>Assingment</Link></li>
-              <li><Link to='/my-posted-jobs' className='text-gray-900'>Create Assingment</Link></li>
-              <li><Link to='/my-bids' className='text-gray-900'>My Assingment</Link></li>
-              <li><Link to='/bid-requests' className='text-gray-900'>Pending</Link></li>
+              <li><Link to='/assingment' className='justify-between text-gray-900'>Assingment</Link></li>
+              <li><Link to='/create' className='text-gray-900'>Create Assingment</Link></li>
+              <li><Link to='/my-assingment' className='text-gray-900'>My Assingment</Link></li>
+              <li><Link to='/submit' className='text-gray-900'>Submitted Assingment</Link></li>
+              <li><Link to='/pending' className='text-gray-900'>Requests</Link></li>
               <li className='mt-2'>
                 <button onClick={logOut} className='bg-gray-200 block text-center'>Logout</button>
               </li>

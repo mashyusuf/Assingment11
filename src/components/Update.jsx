@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Swal from 'sweetalert2';
 import './Style.css';
 import mern from '../assets/mern.jpg';
 import { AuthContext } from '../Provider/AuthProvider';
@@ -14,14 +13,14 @@ const Update = () => {
   const {
     _id,
     title,
+    url,
     date,
     dropdown,
     mark,
     description,
   } = assingments || {};
-  
-  const [ setTitle] = useState('');
   const [ setDescription] =useState('');
+  const [ setTitle] = useState('')
   const [marks, setMarks] = useState('');
   const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [difficulty, setDifficulty] = useState('easy');
@@ -29,20 +28,21 @@ const Update = () => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
+    
     event.preventDefault();
     const form = event.target;
     const title = form.querySelector('#title').value;
-    const mark = form.querySelector('#marks').value;
-    const thumbnailUrl = form.querySelector('#thumbnailUrl').value; // Use thumbnailUrl instead of url
-    const dropdown = form.querySelector('#dropdown').value;
+    const mark = marks;
+    const url = form.querySelector('#thumbnailUrl').value;// Use thumbnailUrl instead of url
+    const dropdown = difficulty
     const date = dueDate;
     const email = user.email;
     const description = form.querySelector('#description').value; // Use description instead of url
-    const everything = { title, mark, thumbnailUrl, dropdown, date, description, email };
+    const everything = { title, mark, url, dropdown, date, description, email };
   
     try {
       const { data } = await axios.put(
-        `${import.meta.env.VITE_API_URL}/assingments/${_id}`,
+        `${import.meta.env.VITE_API_URL}/update-myAssingment/${_id}`,
         everything
       )
       console.log(data)

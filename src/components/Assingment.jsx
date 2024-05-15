@@ -76,6 +76,7 @@ const Assingment = () => {
     return (
         <Tabs>
         <div className=' container px-6 py-10 mx-auto'>
+        <img className=" w-full h-[400px] mb-10" src={umm} alt="" />
      
           <div className='flex items-center justify-center'>
           <TabList className="flex items-center justify-center">

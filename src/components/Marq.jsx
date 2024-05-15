@@ -8,7 +8,8 @@ import js3 from "../assets/css.png";
 
 const Marq = () => {
   return (
-    <div className="marquee-container mt-20 mb-20 ">
+    <div className="marquee-container  mb-20 ">
+      <h1 className="text-4xl font-bold text-center mb-10 text-orange-600">PROGRAMING LANGUAGE</h1>
       <Marquee speed={200}>
         <img src={js} alt="" className= "w-44 h-36 mr-24 rounded-full hover:scale-110" />
         <img src={js1} alt="" className="w-44 h-36 mr-24 rounded-full hover:scale-110" />

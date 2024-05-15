@@ -15,7 +15,7 @@ const Slide = ({ image, text }) => {
           </h1>
           <br />
           <Link
-            to='/'
+            to='/normal'
             className='w-full px-5 py-4 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-emerald-700 rounded-md lg:w-auto  focus:outline-none focus:bg-gray-500'
           >
            Get Start With A Journy

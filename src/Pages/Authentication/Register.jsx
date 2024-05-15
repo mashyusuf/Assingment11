@@ -4,6 +4,7 @@ import logo from '../../assets/logo.jpg'
 import { useContext } from 'react'
 import { AuthContext } from '../../Provider/AuthProvider'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 const Registration = () => {
   const navigate = useNavigate()
   const location = useLocation()
@@ -23,7 +24,12 @@ const Registration = () => {
       const result = await createUser(email, pass)
       console.log(result)
       await updateUserProfile(name, photo)
-      setUser({ ...user, photoURL: photo, displayName: name })
+      setUser({ ...result?.user, photoURL: photo, displayName: name })
+      console.log(result.user)
+    const {data} = await axios.post(`${import.meta.env.VITE_API_USER}/jwt`,{email: result?.user?.email}
+      , {withCredentials: true}
+    )
+    console.log(data)
       navigate(form , {replace: true})
       toast.success('Signup Successful')
     } catch (err) {
@@ -35,7 +41,12 @@ const Registration = () => {
   // Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle()
+     const result = await signInWithGoogle()
+     console.log(result.user)
+    const {data} = await axios.post(`${import.meta.env.VITE_API_USER}/jwt`,{email: result?.user?.email}
+      , {withCredentials: true}
+    )
+    console.log(data)
       toast.success('Signin Successful')
       navigate(form , {replace: true})
     } catch (err) {
@@ -163,10 +174,13 @@ const Registration = () => {
             <div className='mt-6'>
               <button
                 type='submit'
+                
                 className='w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50'
               >
                 Sign Up
+                
               </button>
+              
             </div>
           </form>
 
